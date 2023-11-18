@@ -1,12 +1,18 @@
 package Classe;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 public class Interface {
 
     public static void main(String[] args) {
         String rodar = " ";
         int opcao=0;
+        Lista<Senha> lista = new Lista();
+        List<Senha> lista2 = new ArrayList<Senha>();//Colocar em ordem
         
-        rodar = JOptionPane.showInputDialog(null, "Desejar abrir o sistema ??");
+        rodar = JOptionPane.showInputDialog(null, "Desejar abrir o sistema ??\n (Sim/Não");
         
         while(rodar.equalsIgnoreCase("sim")){
            opcao = Integer.parseInt(JOptionPane.showInputDialog(null, 
@@ -19,24 +25,29 @@ public class Interface {
                                     "\n6.Inserir senhas numa ARVORE "+
                                     "\n7.Salvar Lista "+
                                     "\n8.[Extra] Criar índice invertido"+
-                                    "\n9.Sair ?? "));
+                                    "\n9.Sair ?"));
            
            
               switch (opcao) {
                   case 1:
-                 
+                      Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "1º Digite o nome do aplicativo"), 
+                                             JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
+                      lista.insere(neo1);
+                      //Adicionando ao mesmo tempo em um Arraylist para o ordenamento
+                      lista2.add(neo1);
                   break;
                   
                   case 2:
-                 
-                  break;
+                      lista.remove();
+                 break;
                   
                   case 3:
-                 
+                      JOptionPane.showMessageDialog(null, lista.toString());
                   break;
                   
                   case 4:
-                 
+                      Collections.sort(lista2);
+                      JOptionPane.showMessageDialog(null,"A lista em ordem pelo tamanho da senha:\n"+ lista2);
                   break;
                   
                   case 5:
@@ -52,6 +63,7 @@ public class Interface {
                   break;
                   
                   case 8:
+                      
                  
                   break;
                   
