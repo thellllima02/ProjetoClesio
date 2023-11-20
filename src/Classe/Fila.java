@@ -1,13 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Classe;
 
-/**
- *
- * @author thell
- */
-public class Fila {
+import java.util.LinkedList;
+
+public class Fila<Lista> {
+    
+    private LinkedList<Lista> obje = new LinkedList<Lista>();
+    
+    public void insere(int o, Lista obj){
+        this.obje.add(o, obj);
+    }
+    public void insereFinal(Lista obj){
+        this.obje.addLast(obj);
+    }
+    public Lista remove(int obj){
+        return this.obje.remove(obj);
+    }
+    public Lista olha(int obj){
+        return this.obje.get(obj);
+        
+    }
+    public int tamanho(){
+        return this.obje.size();
+    }
+    @Override
+    public String toString() {
+        return this.obje.toString();
+    }
+    
     
 }

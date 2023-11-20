@@ -23,7 +23,11 @@ public class Lista<Senha> {
         return this.objetos.toString();
     }
     public Senha getElemento(int o){
-        return this.objetos.get(o);
+        if(o>this.tamanho()){
+            return null;
+        }
+        else{
+        return this.objetos.get(o);    
+        }
     }
-    
 }
