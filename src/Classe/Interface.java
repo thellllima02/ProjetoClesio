@@ -1,8 +1,5 @@
 package Classe;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import javax.swing.JOptionPane;
 public class Interface {
 
@@ -51,6 +48,7 @@ public class Interface {
                   break;
                   
                   case 5:
+                        
                  
                   break;
                   

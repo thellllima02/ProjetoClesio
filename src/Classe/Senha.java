@@ -9,6 +9,10 @@ public class Senha implements Comparable<Senha>{
         this.NomeDoAplicativo = NomeDoAplicativo.toLowerCase();
         this.Senha = Senha;
     }
+    public boolean equals(Senha outro) {
+     
+        return this.NomeDoAplicativo.equals(outro.getNomeDoAplicativo());
+    }
     public String getNomeDoAplicativo() {
         return NomeDoAplicativo;
     }

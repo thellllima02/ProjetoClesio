@@ -30,4 +30,8 @@ public class Lista<Senha> {
         return this.objetos.get(o);    
         }
     }
+
+    Pilha<Senha> get(int l) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
