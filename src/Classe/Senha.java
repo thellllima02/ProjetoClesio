@@ -1,5 +1,5 @@
 package Classe;
-
+//Generalizar o Comparable para Object 
 public class Senha implements Comparable<Senha>{
     private String NomeDoAplicativo;
     private String Senha;
