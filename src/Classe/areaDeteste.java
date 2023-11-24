@@ -33,6 +33,31 @@ public class areaDeteste {
             }
             }
         }
+// 5ª Questão
+
+        Lista lista = new Lista();
+        
+        while(lista.tamanho() > cont){
+            
+            for(int i = 0; i < lista.tamanho() - 1; i++)
+            {
+                for(int j = 0; j < lista.tamanho() - 1; j++)
+                {
+                    Pilha pilha = new Pilha();
+                    
+                    if(lista.getElemento(i).equals(lista.getElemento(j)))
+                    {
+                        pilha.insere(lista.getElemento(i));
+                    }
+                }
+                
+                lista2.insere(pilha);
+            }
+        }
+
+        System.out.println(lista2.toString());
+// 
+        
 //        if(fila.tamanhoFila() == 0){
 //            fila.i
 //        }
