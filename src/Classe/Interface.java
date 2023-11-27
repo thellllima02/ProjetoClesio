@@ -58,24 +58,25 @@ public class Interface {
 
 //forma de adicionar em ordem do menor ao maior
                     int roda = lista.tamanho();
-                    int contW = 0,
-                     contIf = 0,
-                     contEl = 0,
-                     contfor = 0;
+                    //A ideia que tive foi assim, um while pra rodar ate a lista ficar vazia, pegar o primeiro da lista, e rodar a fila procurando
+                    //qual é o menor ou igual a ele, caso não tenha nem um adicionar no final, Mas o for junto com if não esta rodando procurando.
                     while (!lista.vazia()) {
-                        contW++;
 
+                        //Aqui era pra ficar rodando, procurando qual o elemento do fila é menor, mas não esxta girando. 
                         for (int e = 0; e < lista.tamanho(); e++) {
-                            contfor++;
-                            Senha elementoAtual =  lista.getElemento(0);
+
+                            Senha elementoAtual = lista.getElemento(0); //Crie essas duas variaveis para poder acessar o getTamanhoDaSenha
                             Senha PilhaAtual = (Senha) pilha.getElemento(e);
-                            if (elementoAtual.getTamanhoDaSenha()>= PilhaAtual.getTamanhoDaSenha()) {
-                                contIf++;
+
+                            //Aqui era pra rodar procurando qual o menor ou igual e adicionar no local de encontrou
+                            if (elementoAtual.getTamanhoDaSenha() >= PilhaAtual.getTamanhoDaSenha()) {
+
                                 pilha.insereLocal(e, elementoAtual);
                                 lista.removeInicio();
                                 break;
+
+                                //Aqui era pro caso de não ter nem um numero menor ou igual a ele     
                             } else {
-                                contEl++;
                                 pilha.insereLocal(e + 1, elementoAtual);
                                 lista.removeInicio();
                                 break;
