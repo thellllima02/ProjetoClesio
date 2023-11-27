@@ -1,10 +1,10 @@
-package arvore;
+package Classe;
 
-public class Arvore<TIPO extends Comparable> {
+public class arvore<TIPO extends Comparable> {
     
     private Elemento<TIPO> raiz;
     
-    public Arvore(){
+    public arvore(){
         this.raiz = null;
         
     }
