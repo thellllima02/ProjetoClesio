@@ -2,20 +2,20 @@ package Classe;
 
 import java.util.LinkedList;
 
-public class Fila<Lista> {
+public class Fila<Tipo> {
     
-    private LinkedList<Lista> obje = new LinkedList<Lista>();
+    private LinkedList<Tipo> obje = new LinkedList<Tipo>();
     
-    public void insere(int o, Lista obj){
+    public void insere(int o, Tipo obj){
         this.obje.add(o, obj);
     }
-    public void insereFinal(Lista obj){
+    public void insereFinal(Tipo obj){
         this.obje.addLast(obj);
     }
-    public Lista remove(int obj){
+    public Tipo remove(int obj){
         return this.obje.remove(obj);
     }
-    public Lista olha(int obj){
+    public Tipo olha(int obj){
         return this.obje.get(obj);
         
     }

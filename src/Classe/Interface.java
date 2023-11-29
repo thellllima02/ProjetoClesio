@@ -83,7 +83,8 @@ public class Interface {
                             }
 
                         }
-                    }
+                    }JOptionPane.showMessageDialog(null, pilha.toString());
+                    
                     break;
 
                 case 5:

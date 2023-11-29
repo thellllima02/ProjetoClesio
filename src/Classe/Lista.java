@@ -2,17 +2,17 @@ package Classe;
 
 import java.util.LinkedList;
 
-public class Lista<Senha> {
+public class Lista<Tipo> {
     
-    private LinkedList<Senha> objetos = new LinkedList<Senha>();
+    private LinkedList<Tipo> objetos = new LinkedList<Tipo>();
     
-    public void insere(Senha obj){
+    public void insere(Tipo obj){
         this.objetos.add(obj);
     }
-    public void insereLocal(int numero, Senha obj) {
+    public void insereLocal(int numero, Tipo obj) {
         this.objetos.add(numero, obj);
     }
-    public Senha remove(){
+    public Tipo remove(){
         return this.objetos.removeLast();
     }
     public Elemento removeInicio() {
@@ -34,7 +34,7 @@ public class Lista<Senha> {
     public String toString() {
         return this.objetos.toString();
     }
-    public Senha getElemento(int o){
+    public Tipo getElemento(int o){
         if(o>this.tamanho()){
             return null;
         }
