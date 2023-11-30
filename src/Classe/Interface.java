@@ -9,6 +9,8 @@ public class Interface {
         String rodar = " ";
         int opcao = 0;
         Lista<Senha> lista = new Lista();
+        SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
+        Lista<Senha> listaRecupera = new Lista<Senha>();//Recuperar os arquivo
         List<Senha> lista2 = new ArrayList<Senha>();//Colocar em ordem
 
         rodar = JOptionPane.showInputDialog(null, "Desejar abrir o sistema ??\n (Sim/Não");
@@ -25,6 +27,7 @@ public class Interface {
                     + "\n7.Salvar Lista "
                     + "\n8.[Extra] Criar índice invertido"
                     + "\n9.Sair ?"));
+            
 
             switch (opcao) {
                 case 1:
@@ -32,7 +35,7 @@ public class Interface {
                             JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
                     lista.insere(neo1);
                     //Adicionando ao mesmo tempo em um Arraylist para o ordenamento
-                    //lista2.add(neo1);
+                    lista2.add(neo1);
                     break;
 
                 case 2:
@@ -41,49 +44,51 @@ public class Interface {
 
                 case 3:
                     JOptionPane.showMessageDialog(null, lista.toString());
+                    listaRecupera  = (Lista<Senha>) sa.ler(); 
+                    JOptionPane.showMessageDialog(null, listaRecupera.toString());
                     break;
 
                 case 4:
-                    //Collections.sort(lista2);
-                    //JOptionPane.showMessageDialog(null,"A lista em ordem pelo tamanho da senha:\n"+ lista2);
+                    Collections.sort(lista2);
+                    JOptionPane.showMessageDialog(null,"A lista em ordem pelo tamanho da senha:\n"+ lista2);
 
-                    //Criando uma pilha de fila
-                    Lista pilha = new Lista();
-
-//Caso a pilha estiver fazia
-                    if (pilha.vazia()) {
-                        pilha.insere(lista.ultimo());//Recebe elemento como parametro
-                        lista.apagar(lista.tamanho() - 1);//Recebe int como parametro
-                    }
-
-//forma de adicionar em ordem do menor ao maior
-                    int roda = lista.tamanho();
-                    //A ideia que tive foi assim, um while pra rodar ate a lista ficar vazia, pegar o primeiro da lista, e rodar a fila procurando
-                    //qual é o menor ou igual a ele, caso não tenha nem um adicionar no final, Mas o for junto com if não esta rodando procurando.
-                    while (!lista.vazia()) {
-
-                        //Aqui era pra ficar rodando, procurando qual o elemento do fila é menor, mas não esxta girando. 
-                        for (int e = 0; e < lista.tamanho(); e++) {
-
-                            Senha elementoAtual = lista.getElemento(0); //Crie essas duas variaveis para poder acessar o getTamanhoDaSenha
-                            Senha PilhaAtual = (Senha) pilha.getElemento(e);
-
-                            //Aqui era pra rodar procurando qual o menor ou igual e adicionar no local de encontrou
-                            if (elementoAtual.getTamanhoDaSenha() >= PilhaAtual.getTamanhoDaSenha()) {
-
-                                pilha.insereLocal(e, elementoAtual);
-                                lista.removeInicio();
-                                break;
-
-                                //Aqui era pro caso de não ter nem um numero menor ou igual a ele     
-                            } else {
-                                pilha.insereLocal(e + 1, elementoAtual);
-                                lista.removeInicio();
-                                break;
-                            }
-
-                        }
-                    }JOptionPane.showMessageDialog(null, pilha.toString());
+//                    //Criando uma pilha de fila
+//                    Lista pilha = new Lista();
+//
+////Caso a pilha estiver fazia
+//                    if (pilha.vazia()) {
+//                        pilha.insere(lista.ultimo());//Recebe elemento como parametro
+//                        lista.apagar(lista.tamanho() - 1);//Recebe int como parametro
+//                    }
+//
+////forma de adicionar em ordem do menor ao maior
+//                    int roda = lista.tamanho();
+//                    //A ideia que tive foi assim, um while pra rodar ate a lista ficar vazia, pegar o primeiro da lista, e rodar a fila procurando
+//                    //qual é o menor ou igual a ele, caso não tenha nem um adicionar no final, Mas o for junto com if não esta rodando procurando.
+//                    while (!lista.vazia()) {
+//
+//                        //Aqui era pra ficar rodando, procurando qual o elemento do fila é menor, mas não esxta girando. 
+//                        for (int e = 0; e < lista.tamanho(); e++) {
+//
+//                            Senha elementoAtual = lista.getElemento(0); //Crie essas duas variaveis para poder acessar o getTamanhoDaSenha
+//                            Senha PilhaAtual = (Senha) pilha.getElemento(e);
+//
+//                            //Aqui era pra rodar procurando qual o menor ou igual e adicionar no local de encontrou
+//                            if (elementoAtual.getTamanhoDaSenha() >= PilhaAtual.getTamanhoDaSenha()) {
+//
+//                                pilha.insereLocal(e, elementoAtual);
+//                                lista.removeInicio();
+//                                break;
+//
+//                                //Aqui era pro caso de não ter nem um numero menor ou igual a ele     
+//                            } else {
+//                                pilha.insereLocal(e + 1, elementoAtual);
+//                                lista.removeInicio();
+//                                break;
+//                            }
+//
+//                        }
+//                    }JOptionPane.showMessageDialog(null, pilha.toString());
                     
                     break;
 
@@ -96,7 +101,8 @@ public class Interface {
                     break;
 
                 case 7:
-
+                    
+                    sa.grava(lista);
                     break;
 
                 case 8:

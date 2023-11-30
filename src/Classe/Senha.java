@@ -1,6 +1,7 @@
 package Classe;
+import java.io.Serializable;
  
-public class Senha implements Comparable<Senha>{
+public class Senha implements Serializable, Comparable<Senha>{
     private String NomeDoAplicativo;
     private String Senha;
     private int TamanhoDaSenha = 0;
