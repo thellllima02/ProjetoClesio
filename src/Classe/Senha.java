@@ -10,6 +10,10 @@ public class Senha implements Serializable, Comparable<Senha>{
         this.NomeDoAplicativo = NomeDoAplicativo.toLowerCase();
         this.Senha = Senha;
     }
+
+    public Senha() {
+    }
+    
     public boolean equals(Senha outro) {
      
         return this.NomeDoAplicativo.equals(outro.getNomeDoAplicativo());

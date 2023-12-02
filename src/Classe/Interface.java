@@ -8,10 +8,13 @@ public class Interface {
     public static void main(String[] args) {
         String rodar = " ";
         int opcao = 0;
-        Lista<Senha> lista = new Lista();
+        
+        Senha neo = new Senha();
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
-        Lista<Senha> listaRecupera = new Lista<Senha>();//Recuperar os arquivo
+        LinkedList<Senha> lista = new LinkedList<Senha>();
+        LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
         List<Senha> lista2 = new ArrayList<Senha>();//Colocar em ordem
+        
 
         rodar = JOptionPane.showInputDialog(null, "Desejar abrir o sistema ??\n (Sim/Não");
 
@@ -33,7 +36,8 @@ public class Interface {
                 case 1:
                     Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "1º Digite o nome do aplicativo"),
                             JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
-                    lista.insere(neo1);
+                    neo = neo1;
+                    lista.add(neo1);
                     //Adicionando ao mesmo tempo em um Arraylist para o ordenamento
                     lista2.add(neo1);
                     break;
@@ -44,8 +48,13 @@ public class Interface {
 
                 case 3:
                     JOptionPane.showMessageDialog(null, lista.toString());
-                    listaRecupera  = (Lista<Senha>) sa.ler(); 
-                    JOptionPane.showMessageDialog(null, listaRecupera.toString());
+                    
+                    listaRecupera  = (LinkedList<Senha>) sa.ler();
+                    
+                    JOptionPane.showMessageDialog(null, "Lista gravada"+listaRecupera.toString());
+                    
+                   
+                    
                     break;
 
                 case 4:
@@ -101,8 +110,9 @@ public class Interface {
                     break;
 
                 case 7:
-                    
                     sa.grava(lista);
+                    
+                    
                     break;
 
                 case 8:
