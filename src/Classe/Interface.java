@@ -6,17 +6,17 @@ import javax.swing.JOptionPane;
 public class Interface {
 
     public static void main(String[] args) {
-        String rodar = " ";
+        String rodar = "";
         int opcao = 0;
-        
+        String confirme="";
         Senha neo = new Senha();
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
         LinkedList<Senha> lista = new LinkedList<Senha>();
         LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
-        List<Senha> lista2 = new ArrayList<Senha>();//Colocar em ordem
+        listaRecupera  = (LinkedList<Senha>) sa.ler();
         
 
-        rodar = JOptionPane.showInputDialog(null, "Desejar abrir o sistema ??\n (Sim/Não");
+        rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
 
         while (rodar.equalsIgnoreCase("sim")) {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
@@ -36,83 +36,27 @@ public class Interface {
                 case 1:
                     Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "1º Digite o nome do aplicativo"),
                             JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
-                    neo = neo1;
-                    lista.add(neo1);
-                    //Adicionando ao mesmo tempo em um Arraylist para o ordenamento
-                    lista2.add(neo1);
-                    break;
-
+                   listaRecupera.add(neo1);
+                   break;
                 case 2:
-                    lista.remove();
+                    listaRecupera.removeLast();
                     break;
-
                 case 3:
-                    JOptionPane.showMessageDialog(null, lista.toString());
-                    
-                    listaRecupera  = (LinkedList<Senha>) sa.ler();
-                    
-                    JOptionPane.showMessageDialog(null, "Lista gravada"+listaRecupera.toString());
-                    
-                   
-                    
+                    JOptionPane.showMessageDialog(null, "---- Lista gravada ----\n"+listaRecupera.toString());
                     break;
-
                 case 4:
-                    Collections.sort(lista2);
-                    JOptionPane.showMessageDialog(null,"A lista em ordem pelo tamanho da senha:\n"+ lista2);
-
-//                    //Criando uma pilha de fila
-//                    Lista pilha = new Lista();
-//
-////Caso a pilha estiver fazia
-//                    if (pilha.vazia()) {
-//                        pilha.insere(lista.ultimo());//Recebe elemento como parametro
-//                        lista.apagar(lista.tamanho() - 1);//Recebe int como parametro
-//                    }
-//
-////forma de adicionar em ordem do menor ao maior
-//                    int roda = lista.tamanho();
-//                    //A ideia que tive foi assim, um while pra rodar ate a lista ficar vazia, pegar o primeiro da lista, e rodar a fila procurando
-//                    //qual é o menor ou igual a ele, caso não tenha nem um adicionar no final, Mas o for junto com if não esta rodando procurando.
-//                    while (!lista.vazia()) {
-//
-//                        //Aqui era pra ficar rodando, procurando qual o elemento do fila é menor, mas não esxta girando. 
-//                        for (int e = 0; e < lista.tamanho(); e++) {
-//
-//                            Senha elementoAtual = lista.getElemento(0); //Crie essas duas variaveis para poder acessar o getTamanhoDaSenha
-//                            Senha PilhaAtual = (Senha) pilha.getElemento(e);
-//
-//                            //Aqui era pra rodar procurando qual o menor ou igual e adicionar no local de encontrou
-//                            if (elementoAtual.getTamanhoDaSenha() >= PilhaAtual.getTamanhoDaSenha()) {
-//
-//                                pilha.insereLocal(e, elementoAtual);
-//                                lista.removeInicio();
-//                                break;
-//
-//                                //Aqui era pro caso de não ter nem um numero menor ou igual a ele     
-//                            } else {
-//                                pilha.insereLocal(e + 1, elementoAtual);
-//                                lista.removeInicio();
-//                                break;
-//                            }
-//
-//                        }
-//                    }JOptionPane.showMessageDialog(null, pilha.toString());
-                    
+                    Collections.sort(listaRecupera);
+                    JOptionPane.showMessageDialog(null,"A lista organizada com sucesso ");
                     break;
-
                 case 5:
-
+                    
                     break;
 
                 case 6:
 
                     break;
-
                 case 7:
-                    sa.grava(lista);
-                    
-                    
+                   sa.grava(listaRecupera);
                     break;
 
                 case 8:
@@ -120,13 +64,15 @@ public class Interface {
                     break;
 
                 case 9:
-                    JOptionPane.showMessageDialog(null, "Saindo");
-                    rodar = "nao";
+                   confirme = JOptionPane.showInputDialog(null, "---- Você salvou as senhas ? ----\n ( Sim / Não )");
+                   if(confirme.equalsIgnoreCase("sim")){
+                    rodar = "nao";   
+                   }else{
+                       rodar = "sim";
+                   }
+                    
                     break;
             }
-
         }
-
     }
-
 }
