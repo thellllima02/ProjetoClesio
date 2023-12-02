@@ -9,7 +9,6 @@ public class Interface {
         String rodar = "";
         int opcao = 0;
         String confirme="";
-        Senha neo = new Senha();
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
         LinkedList<Senha> lista = new LinkedList<Senha>();
         LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
