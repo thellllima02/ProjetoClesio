@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 public class Interface {
 
     public static void main(String[] args) {
-        String rodar = "";
+        String rodar = " ";
         int opcao = 0;
-        String confirme="";
+        String confirme=" ";
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
         LinkedList<Senha> lista = new LinkedList<Senha>();
         LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
@@ -35,18 +35,24 @@ public class Interface {
                 case 1:
                     Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "1º Digite o nome do aplicativo"),
                             JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
-                   listaRecupera.add(neo1);
-                   break;
-                case 2:
-                    listaRecupera.removeLast();
+                    lista.add(neo1);
+                    sa.grava(lista);
+                    listaRecupera.add(neo1);
                     break;
+
+                case 2:
+                    lista.removeLast();
+                    break;
+
                 case 3:
                     JOptionPane.showMessageDialog(null, "---- Lista gravada ----\n"+listaRecupera.toString());
                     break;
+
                 case 4:
                     Collections.sort(listaRecupera);
-                    JOptionPane.showMessageDialog(null,"A lista organizada com sucesso ");
-                    break;
+                    JOptionPane.showMessageDialog(null,"Lista em ordem, não esqueça de salvar.");
+                     break;
+
                 case 5:
                     
                     break;
@@ -54,6 +60,7 @@ public class Interface {
                 case 6:
 
                     break;
+
                 case 7:
                    sa.grava(listaRecupera);
                     break;

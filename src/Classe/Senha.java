@@ -6,14 +6,13 @@ public class Senha implements Serializable, Comparable<Senha>{
     private String Senha;
     private int TamanhoDaSenha = 0;
 
+    public Senha() {
+    }
+
     public Senha(String NomeDoAplicativo, String Senha) {
         this.NomeDoAplicativo = NomeDoAplicativo.toLowerCase();
         this.Senha = Senha;
     }
-
-    public Senha() {
-    }
-    
     public boolean equals(Senha outro) {
      
         return this.NomeDoAplicativo.equals(outro.getNomeDoAplicativo());
