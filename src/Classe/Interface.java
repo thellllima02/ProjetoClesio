@@ -33,24 +33,34 @@ public class Interface {
 
             switch (opcao) {
                 case 1:
-                    Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "1º Digite o nome do aplicativo"),
-                            JOptionPane.showInputDialog(null, "2º Digite a sua senha agora"));
+                    Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "---- 1º Digite o nome do aplicativo ----"),
+                            JOptionPane.showInputDialog(null, "---- 2º Digite a sua senha agora ----"));
                     lista.add(neo1);
                     sa.grava(lista);
                     listaRecupera.add(neo1);
                     break;
 
                 case 2:
-                    lista.removeLast();
+                    if(listaRecupera.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Está vazia");
+                    }
+                    else{
+                        listaRecupera.removeLast();
+                    }
                     break;
 
                 case 3:
-                    JOptionPane.showMessageDialog(null, "---- Lista gravada ----\n"+listaRecupera.toString());
+                    if(listaRecupera.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Está vazia");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "---- Lista gravada ----\n"+listaRecupera.toString());
+                    }
                     break;
 
                 case 4:
                     Collections.sort(listaRecupera);
-                    JOptionPane.showMessageDialog(null,"Lista em ordem, não esqueça de salvar.");
+                    JOptionPane.showMessageDialog(null,"Lista em ordena com sucesso\n **Não esqueça de salvar antes de sair**");
                      break;
 
                 case 5:
@@ -63,6 +73,7 @@ public class Interface {
 
                 case 7:
                    sa.grava(listaRecupera);
+                   JOptionPane.showMessageDialog(null, "---- Lista salva ----");
                     break;
 
                 case 8:
