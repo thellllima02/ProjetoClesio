@@ -1,274 +1,264 @@
 package Classe;
 
-public class arvore<TIPO extends Comparable> {
+public class Arvore<T extends Comparable> {
     
-    private Elemento<TIPO> raiz;
+    private Elemento<T> raiz;
     
-    public arvore(){
+    public Arvore()
+    {
         this.raiz = null;
-        
     }
     
-    public Elemento<TIPO> getRaiz() {
+    
+    public Elemento<T> getRaiz()
+    {
         return raiz;
     }
     
-    public void setRaiz(Elemento<TIPO> r) {
-         raiz = r;
+    public void setRaiz(Elemento<T> r)
+    {
+        this.raiz = r;
     }
     
-    public void adicionar(TIPO valor){
-        Elemento<TIPO> novoElemento = new Elemento<TIPO>(valor); 
+    public boolean adicionar(T valor)
+    {
+        Elemento<T> novoElemento = new Elemento<T>(valor);
         
-        if (raiz == null){    // Caso arvore vazia
+        if(raiz == null)
+        {
             this.raiz = novoElemento;
-        }
-        else{
-            Elemento<TIPO> atual = this.raiz;   // inicia raiz com atual
             
-            while(true){ //roda constante entrado nos nivies da arvore - Para com break 
-                // ------------- Novo elementno MENOR
-                if (novoElemento.getValor().compareTo(atual.getValor()) == -1){   
-                    if (atual.getEsquerda() != null){
-                        atual = atual.getEsquerda();
-                    }else{
-                        atual.setEsquerda(novoElemento);
-                        break;
-                    }
-                }
-                else{ //-------- Novo elemento MAIOR ou igual                        
-                    if (atual.getDireita() != null){
-                        atual = atual.getDireita();
-                    }else{
-                        atual.setDireita(novoElemento);
-                        break;
-                    }
+            return true;
+        }
+        
+        else
+        {
+            Elemento<T> atual = this.raiz;
+            
+            while(true)
+            {
+                switch (novoElemento.getValor().compareTo(atual.getValor())) {
+                    case -1:
+                        if(atual.getEsquerda() != null)
+                        {
+                            atual = atual.getEsquerda();
+                        }
+                        
+                        else
+                        {
+                            atual.setEsquerda(novoElemento);
+                            
+                            return true;
+                        }   break;
+                    case 1:
+                        if (atual.getDireita() != null)
+                        {
+                            atual = atual.getDireita();
+                        }
+                        
+                        else
+                        {
+                            atual.setDireita(novoElemento);
+                            
+                            return true;
+                        }   break;
+                    default:
+                        return false;
                 }
             }
         }
     }
     
- 
-    
-    public  Elemento<TIPO> adicionarRec(TIPO valor, Elemento<TIPO> raizAtual){
-        
-        Elemento<TIPO> novoElemento = new Elemento<TIPO>(valor); 
-        
-       //raiz atualvaiza  salva
-        if (raizAtual == null){  
-            raizAtual = novoElemento;
-            
-            // Primeiro elemento, atualiza raiz geral.
-            if (raiz == null)   
-              this.raiz = raizAtual;
-        }                       
-        else
-        {   //Menor busca esquerda
-            if (novoElemento.getValor().compareTo(raizAtual.getValor()) == -1)
-                 raizAtual.setEsquerda( adicionarRec(valor, raizAtual.getEsquerda()) );
-                   
-            //Maior busca direita   
-            else 
-               raizAtual.setDireita( adicionarRec(valor, raizAtual.getDireita()) );      
+    public String emOrdem(Elemento<T> atual)
+    {
+        if(atual != null)
+        {
+            return emOrdem(atual.getEsquerda()) + atual.getValor() + ", " + emOrdem(atual.getDireita());
         }
         
-               
-        // retorna para o pai o novo elemento criado, ou o ja existente nessa posição
-        return raizAtual; 
-    }
-
-  
-    
-    public String emOrdem(Elemento<TIPO> atual){
-        
-        if (atual != null){
-            return emOrdem(atual.getEsquerda()) + 
-                   atual.getValor() + ", " + 
-                   emOrdem(atual.getDireita());
-        }
         else
-            return "";         
-    }
-    
-    public String preOrdem(Elemento<TIPO> atual){
-        if (atual != null){
-            return atual.getValor()+ ", " + 
-                   preOrdem(atual.getEsquerda()) + 
-                   preOrdem(atual.getDireita());
-        } 
-        else
+        {
             return "";
+        }
     }
     
-    public String posOrdem(Elemento<TIPO> atual){
-        if (atual != null){
-            return posOrdem(atual.getEsquerda()) + 
-                   posOrdem(atual.getDireita()) +
-                   atual.getValor()+ ", " ;  
-        } 
+    public String preOrdem(Elemento<T> atual)
+    {
+        if(atual != null)
+        {
+            return atual.getValor() + ", " + preOrdem(atual.getEsquerda()) + preOrdem(atual.getDireita());
+        }
+        
         else
-            return "";       
+        {
+            return "";
+        }
     }
     
-    public boolean remover(TIPO valor){
+    public String posOrdem(Elemento<T> atual)
+    {
+        if(atual != null)
+        {
+            return posOrdem(atual.getEsquerda()) + posOrdem(atual.getDireita()) + atual.getValor() + ", ";
+        }
         
-        // A) -- Buscar o elemento a remover na árvore (e seu pai) ----------
+        else
+        {
+            return "";
+        }
+    }
+    
+    public boolean remover(T valor){
         
-        Elemento<TIPO> atual = this.raiz;  
-        Elemento<TIPO> paiAtual = null;
+        Elemento<T> atual = this.raiz;
         
-        //percorre arvore
+        Elemento<T> paiAtual = null;
+        
         while(atual != null){
             
-            // valor procurado é igual - Encontrou elemento [Atual]
-            if (atual.getValor().equals(valor)){ 
+            if (atual.getValor().equals(valor))
+            { 
                 break;                
             }
-            //valor procurado é menor -> vai para [Esquerda] 
-            else if (valor.compareTo(atual.getValor()) == -1){  
+            
+            else if (valor.compareTo(atual.getValor()) == -1)
+            {  
                 paiAtual = atual;
+                
                 atual = atual.getEsquerda();
             }
-            //valor procurado é maior -> vai para [Direita] 
-            else{     
+            
+            else
+            {     
                 paiAtual = atual;
+                
                 atual = atual.getDireita();
             }
-        } // ao fim atual contem o elemento encontrdo ou null se não encontrado
+        }
         
-        
-        //Elemento a remover encotrado
-        if (atual != null){ 
+        if (atual != null)
+        {
+            Elemento<T> removeEle = atual;
             
-            // B) -- Buscar elemento substituto e efetuar a substituição - 3 casos ----------
+            Elemento<T> removePai = paiAtual; 
             
-            Elemento<TIPO> eleRemover = atual;    //Elemento a remover 
-            Elemento<TIPO> paiRemover = paiAtual; //Pai elemento a remover  
-            
-            
-            //----- 1 CASO - Elemento tem 2 filhos ou tem somente filho à Direita
-            //        (Substituo sera  encontrado: Um pulo a Direita, e Esquerda sempre)    
-            if (eleRemover.getDireita() != null){
+            if (removeEle.getDireita() != null){
                 
-                // 1-- Encontrar substituto -------
+                Elemento<T> substituto = removeEle.getDireita();
                 
-                //Um pulo a direita
-                Elemento<TIPO> substituto = eleRemover.getDireita(); // Inicia a direita
-                Elemento<TIPO> paiSubstituto = eleRemover;
-                char paiAndouPara = 'D';                        // guarda para onde andou 
+                Elemento<T> paiSubstituto = removeEle;
                 
-                //Vai para a esquerda até chegar em um que não tenha mais esquerda 
+                char paiFoi = 'D';                  
+                
                 while(substituto.getEsquerda() != null){
                     paiSubstituto = substituto;
                     substituto = substituto.getEsquerda();
-                    paiAndouPara = 'E';                        // guarda para onde andou 
+                    paiFoi = 'E';
                 }
                 
-                // 2-- Eliminar subsitituto -------
-                //jogando o que tem na direita dele(null ou itens) no pai, pois na esquerda não tem nada
-                if(paiAndouPara == 'D')   //Vindo da direita do pai (primeiro pulo)
-                   paiSubstituto.setDireita(substituto.getDireita());
+                if(paiFoi == 'D')
+                    paiSubstituto.setEsquerda(substituto.getDireita());
                 
-                else                     //Vindo da Esquerda do pai (while pulando a esquerda)
-                   paiSubstituto.setEsquerda(substituto.getDireita());
+                else                  
+                    paiSubstituto.setDireita(substituto.getDireita());
                 
+                substituto.setEsquerda(removeEle.getEsquerda());
                 
-                // 3-- Substituto pega posição do elemento a remover 
-                substituto.setEsquerda(eleRemover.getEsquerda()); //vinclua subarvore esquerda
-                substituto.setDireita(eleRemover.getDireita());   //vinclua subarvore direta
+                substituto.setDireita(removeEle.getDireita());
                 
-                // 4-- Pai do elemento a remover direciona para substituto já posicionado
-                if (paiRemover != null){
-                   
-                    //menor - a eliminar está a esquerda do pai ->  (eleRemover < paiRemover)
-                    if (eleRemover.getValor().compareTo(paiRemover.getValor()) == -1){ 
-                        paiRemover.setEsquerda(substituto);
+                if (removePai != null){
+                    
+                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1)
+                    { 
+                        removePai.setEsquerda(substituto);
                     }
-                    //maior - a substituir está a direita do pai
-                    else{
-                        paiRemover.setDireita(substituto);
+                    
+                    else
+                    {
+                        removePai.setDireita(substituto);
                     }
                 }
-                //se não tem paiRemover, então elemento está na raiz
-                else{
+                
+                else
+                {
                     this.raiz = substituto;
                 }   
             }
             
-            
-            //----- 2 CASO - Tem filho só à Esquerda
-            //        (Substituo sera  encontrado: Um pulo a Esquerda, e Direita sempre)  
-            else if (eleRemover.getEsquerda() != null){ 
-               
-                // 1-- Encontrar substituto -------   
+            else if (removeEle.getEsquerda() != null){ 
                 
-                //Um pulo a esquerda
-                Elemento<TIPO> substituto = eleRemover.getEsquerda(); // Inicia a esquerda
-                Elemento<TIPO> paiSubstituto = eleRemover;
-                char paiAndouPara = 'E';                         // guarda para onde andou
+                Elemento<T> substituto = removeEle.getEsquerda();
                 
-                //Vai para a direita até chegar em um que não tenha mais direita 
-                while(substituto.getDireita() != null){
+                Elemento<T> paiSubstituto = removeEle;
+                
+                char paiFoi = 'E';
+                
+                
+                while(substituto.getDireita() != null)
+                {
                     paiSubstituto = substituto;
+                    
                     substituto = substituto.getDireita();
-                    paiAndouPara = 'D';                         // guarda para onde andou
+                    
+                    paiFoi = 'D';
                 }
+                               
+                if(paiFoi == 'E') 
+                    paiSubstituto.setEsquerda(substituto.getEsquerda());
                 
-                // 2-- Eliminar subsitituto -------
-                //jogando o que tem na esquerda dele(null ou itens) no pai, pois na direita não tem nada                
-                if(paiAndouPara == 'E')     //Vindo da Esquerda do pai (primeiro pulo)
-                   paiSubstituto.setEsquerda(substituto.getEsquerda());
-                
-                else                        //Vindo da Direta do pai (while pulando a direita)
+                else                        
                    paiSubstituto.setDireita(substituto.getEsquerda());
                 
-                // 3-- Substituto pega posição do elemento a remover 
-                substituto.setEsquerda(eleRemover.getEsquerda()); //vinclua subarvore esquerda
-                substituto.setDireita(eleRemover.getDireita());   //vinclua subarvore direta - será NULL
+                
+                substituto.setEsquerda(removeEle.getEsquerda());
+                
+                substituto.setDireita(removeEle.getDireita());
 
-                // 4-- Pai do elemento a remover direciona para substituto já posicionado
-                if (paiRemover != null){
+                if (removePai != null){
                     
-                    //menor - a eliminar está a esquerda do pai ->  (eleRemover < paiRemover)
-                    if (eleRemover.getValor().compareTo(paiRemover.getValor()) == -1){ 
-                        paiRemover.setEsquerda(substituto); 
+                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1)
+                    {
+                        removePai.setEsquerda(substituto); 
                     }
-                    //maior - a substituir está a direita do pai
-                    else{
-                        paiRemover.setDireita(substituto);
+                    
+                    else
+                    {
+                        removePai.setDireita(substituto);
                     }
                 }
-                //se não tem paiRemover, então elemento está na raiz
-                else{ 
+                
+                else
+                { 
                     this.raiz = substituto;
                 }
 
             }
             
-            //----- 3 CASO - Elemento Não tem filho
-            else if (paiRemover != null){
+            else if (removePai != null){
                 
-                //menor - a eliminar está a esquerda do pai ->  (eleRemover < paiRemover)
-                if (eleRemover.getValor().compareTo(paiRemover.getValor()) == -1){ 
-                    paiRemover.setEsquerda(null);
+                
+                if (removeEle.getValor().compareTo(removePai.getValor()) == -1){ 
+                    removePai.setEsquerda(null);
                 }
-                //maior - a substituir está a direita do pai
-                else{ 
-                    paiRemover.setDireita(null);
+                
+                else
+                { 
+                    removePai.setDireita(null);
                 }
             }
             
-            //----- é a raiz unico item
-            else{ 
+            else
+            { 
                     this.raiz = null;
             }
             
-            return true;   // Remoção efetuada
+            return true;
         }
         
-        // Nao existe elemento a remover
-        else{ 
-            return false;  // Remoção Não efetuada
+        
+        else
+        { 
+            return false;
         }        
     }
 }
