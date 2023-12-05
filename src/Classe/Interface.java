@@ -10,19 +10,14 @@ public class Interface {
         int opcao = 0;
         String confirme = " ";
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
-        LinkedList<Senha> lista = new LinkedList<Senha>();
         LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
         listaRecupera = (LinkedList<Senha>) sa.ler();//Recupera e add os novos nomes
         LinkedList<String> listaAplicativoBanco = new LinkedList<String>(); //Receber os nomes de Banco
         LinkedList<String> listaNomesPassados = new LinkedList<String>(); //Receber os nomes de foram passado
         String neo2 = "";//Usado para receber os nomes e add na listaAplicativoBanco
         String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
-        
-        
 
         rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
-        
-        
 
         while (rodar.equalsIgnoreCase("sim")) {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
@@ -39,12 +34,6 @@ public class Interface {
 
             switch (opcao) {
                 case 1:
-                    if(listaRecupera.size() == 0){
-                        Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "---- 1º Digite o nome do aplicativo ----"),
-                            JOptionPane.showInputDialog(null, "---- 2º Digite a sua senha agora ----"));
-                        lista.add(neo1);
-                        sa.grava(lista);
-                    }
                     Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "---- 1º Digite o nome do aplicativo ----"),
                             JOptionPane.showInputDialog(null, "---- 2º Digite a sua senha agora ----"));
                     listaRecupera.add(neo1);
@@ -90,9 +79,9 @@ public class Interface {
 
                 case 6:
                     Iterator<Senha> iterador2 = listaRecupera.iterator();
-                     LinkedList lista2 = new LinkedList();
-                     Arvore arvore = new Arvore();
-                  while (iterador2.hasNext()) {
+                    LinkedList lista2 = new LinkedList();
+                    Arvore arvore = new Arvore();
+                    while (iterador2.hasNext()) {
                         Senha u2 = iterador2.next();
                         if (arvore.adicionar(u2) == true) {
 
@@ -112,40 +101,40 @@ public class Interface {
 
                 case 8:
                     //Pegando todos os nomes de bancos e colocando em uma lista
-                    for(int e=0; e<listaRecupera.size();e++){
+                    for (int e = 0; e < listaRecupera.size(); e++) {
                         Senha recebe = listaRecupera.get(e);
-                    
-                    String texto = recebe.getNomeDoAplicativo();
-                    
-                    String palavra = "";
-                    int cont = 1,
-                     cont2 = 0;
-                    //Ver quantas palavras tem no frase.
-                    for (int i = 0; i < texto.length(); i++) {
-                        if (texto.charAt(i) == ' ') {
-                            cont++;
+
+                        String texto = recebe.getNomeDoAplicativo();
+
+                        String palavra = "";
+                        int cont = 1,
+                                cont2 = 0;
+                        //Ver quantas palavras tem no frase.
+                        for (int i = 0; i < texto.length(); i++) {
+                            if (texto.charAt(i) == ' ') {
+                                cont++;
+                            }
                         }
-                    }
-                    //Fazendo a coleta de cada palavra que veio no texto
-                    for (int i = cont2; i < texto.length(); i++) {
-                        if (texto.charAt(i) != ' ') {
-                            palavra += texto.charAt(i);
-                            cont2++;
-                        } else {
-                            neo2 = new String(palavra);
-                            listaAplicativoBanco.add(neo2);
-                            cont2++;
-                            palavra = "";
+                        //Fazendo a coleta de cada palavra que veio no texto
+                        for (int i = cont2; i < texto.length(); i++) {
+                            if (texto.charAt(i) != ' ') {
+                                palavra += texto.charAt(i);
+                                cont2++;
+                            } else {
+                                neo2 = new String(palavra);
+                                listaAplicativoBanco.add(neo2);
+                                cont2++;
+                                palavra = "";
+                            }
                         }
-                    }
-                    neo2 = new String(palavra);
-                    listaAplicativoBanco.add(neo2);//Usar para ver os nomes de bancos
-                    
+                        neo2 = new String(palavra);
+                        listaAplicativoBanco.add(neo2);//Usar para ver os nomes de bancos
+
                     }
                     //Pegando os nomes da String e colocando na lista
                     String recebe2 = JOptionPane.showInputDialog(null, "Digite os nomes ");
                     String texto2 = recebe2;
-                    
+
                     String palavra2 = "";
                     int cont = 1,
                      cont2 = 0;
@@ -169,7 +158,7 @@ public class Interface {
                     }
                     neo3 = new String(palavra2);
                     listaNomesPassados.add(neo3);//Usar para ver os nomes
-                    
+
                     JOptionPane.showMessageDialog(null, listaAplicativoBanco);
                     JOptionPane.showMessageDialog(null, listaNomesPassados);
 
@@ -184,7 +173,7 @@ public class Interface {
                     }
 
                     break;
-                    
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opção Invalida");
             }
