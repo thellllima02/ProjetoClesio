@@ -17,11 +17,8 @@ public class Interface {
         LinkedList<String> listaNomesPassados = new LinkedList<String>(); //Receber os nomes de foram passado
         String neo2 = "";//Usado para receber os nomes e add na listaAplicativoBanco
         String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
-        HashMap<String, LinkedList<String>> mapa = new HashMap<String, LinkedList<String>>();
-        Iterator<Senha> iterador = listaRecupera.iterator();//Questão 5
-        Iterator<Senha> iterador2 = listaRecupera.iterator();
-        LinkedList lista2 = new LinkedList();
-        Arvore arvore = new Arvore();
+        
+        
 
         rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
         
@@ -42,10 +39,14 @@ public class Interface {
 
             switch (opcao) {
                 case 1:
+                    if(listaRecupera.size() == 0){
+                        Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "---- 1º Digite o nome do aplicativo ----"),
+                            JOptionPane.showInputDialog(null, "---- 2º Digite a sua senha agora ----"));
+                        lista.add(neo1);
+                        sa.grava(lista);
+                    }
                     Senha neo1 = new Senha(JOptionPane.showInputDialog(null, "---- 1º Digite o nome do aplicativo ----"),
                             JOptionPane.showInputDialog(null, "---- 2º Digite a sua senha agora ----"));
-                    lista.add(neo1);
-                    sa.grava(lista);
                     listaRecupera.add(neo1);
                     break;
 
@@ -71,6 +72,8 @@ public class Interface {
                     break;
 
                 case 5:
+                    HashMap<String, LinkedList<String>> mapa = new HashMap<String, LinkedList<String>>();
+                    Iterator<Senha> iterador = listaRecupera.iterator();
                     while (iterador.hasNext()) {
                         Senha u = iterador.next();
                         String nome = u.getNomeDoAplicativo();
@@ -86,6 +89,9 @@ public class Interface {
                     break;
 
                 case 6:
+                    Iterator<Senha> iterador2 = listaRecupera.iterator();
+                     LinkedList lista2 = new LinkedList();
+                     Arvore arvore = new Arvore();
                   while (iterador2.hasNext()) {
                         Senha u2 = iterador2.next();
                         if (arvore.adicionar(u2) == true) {
