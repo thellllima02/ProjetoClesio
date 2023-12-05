@@ -19,8 +19,13 @@ public class Interface {
         String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
         HashMap<String, LinkedList<String>> mapa = new HashMap<String, LinkedList<String>>();
         Iterator<Senha> iterador = listaRecupera.iterator();//Questão 5
+        Iterator<Senha> iterador2 = listaRecupera.iterator();
+        LinkedList lista2 = new LinkedList();
+        Arvore arvore = new Arvore();
 
         rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
+        
+        
 
         while (rodar.equalsIgnoreCase("sim")) {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
@@ -81,19 +86,17 @@ public class Interface {
                     break;
 
                 case 6:
-                    Arvore arvore = new Arvore();
-                    LinkedList lista2 = new LinkedList();
-                    while (iterador.hasNext()) {
-                        Senha u = iterador.next();
-                        String senha = u.getSenha();
-                        arvore.adicionar(senha);
-                        if (arvore.adicionar(senha) == false) {
-                            lista2.add(senha);
+                  while (iterador2.hasNext()) {
+                        Senha u2 = iterador2.next();
+                        if (arvore.adicionar(u2) == true) {
+
+                        } else {
+                            lista2.add(u2);
                         }
                     }
-                    JOptionPane.showMessageDialog(null,"---- Arvore em Pre Ordem ----\n"+arvore.preOrdem(arvore.getRaiz()));
-                    JOptionPane.showMessageDialog(null,"---- Arvore em Ordem ----\n"+arvore.emOrdem(arvore.getRaiz()));
-                    JOptionPane.showMessageDialog(null,"---- Arvore em Pos Ordem ----\n"+arvore.posOrdem(arvore.getRaiz()));
+                    JOptionPane.showMessageDialog(null, "---- Arvore em Pre Ordem ----\n" + arvore.preOrdem(arvore.getRaiz()));
+                    JOptionPane.showMessageDialog(null, "---- Arvore em Ordem ----\n" + arvore.emOrdem(arvore.getRaiz()));
+                    JOptionPane.showMessageDialog(null, "---- Arvore em Pos Ordem ----\n" + arvore.posOrdem(arvore.getRaiz()));
                     break;
 
                 case 7:
@@ -175,6 +178,9 @@ public class Interface {
                     }
 
                     break;
+                    
+                default:
+                    JOptionPane.showMessageDialog(null, "Opção Invalida");
             }
         }
     }

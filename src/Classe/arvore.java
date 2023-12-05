@@ -1,264 +1,188 @@
 package Classe;
 
 public class Arvore<T extends Comparable> {
-    
+
     private Elemento<T> raiz;
-    
-    public Arvore()
-    {
+
+    public Arvore() {
         this.raiz = null;
     }
-    
-    
-    public Elemento<T> getRaiz()
-    {
+
+    public Elemento<T> getRaiz() {
         return raiz;
     }
-    
-    public void setRaiz(Elemento<T> r)
-    {
+
+    public void setRaiz(Elemento<T> r) {
         this.raiz = r;
     }
-    
-    public boolean adicionar(T valor)
-    {
+
+    public boolean adicionar(T valor) {
         Elemento<T> novoElemento = new Elemento<T>(valor);
-        
-        if(raiz == null)
-        {
+        if (raiz == null) {
             this.raiz = novoElemento;
-            
             return true;
-        }
-        
-        else
-        {
+        } else {
             Elemento<T> atual = this.raiz;
-            
-            while(true)
-            {
+            while (true) {
                 switch (novoElemento.getValor().compareTo(atual.getValor())) {
                     case -1:
-                        if(atual.getEsquerda() != null)
-                        {
+                        if (atual.getEsquerda() != null) {
                             atual = atual.getEsquerda();
-                        }
-                        
-                        else
-                        {
+                        } else {
                             atual.setEsquerda(novoElemento);
-                            
+
                             return true;
-                        }   break;
-                    case 1:
-                        if (atual.getDireita() != null)
-                        {
-                            atual = atual.getDireita();
                         }
-                        
-                        else
-                        {
+                        break;
+                    case 1:
+                        if (atual.getDireita() != null) {
+                            atual = atual.getDireita();
+                        } else {
                             atual.setDireita(novoElemento);
-                            
+
                             return true;
-                        }   break;
+                        }
+                        break;
                     default:
                         return false;
                 }
             }
         }
     }
-    
-    public String emOrdem(Elemento<T> atual)
-    {
-        if(atual != null)
-        {
+
+    public String emOrdem(Elemento<T> atual) {
+        if (atual != null) {
             return emOrdem(atual.getEsquerda()) + atual.getValor() + ", " + emOrdem(atual.getDireita());
-        }
-        
-        else
-        {
+        } else {
             return "";
         }
     }
-    
-    public String preOrdem(Elemento<T> atual)
-    {
-        if(atual != null)
-        {
+
+    public String preOrdem(Elemento<T> atual) {
+        if (atual != null) {
             return atual.getValor() + ", " + preOrdem(atual.getEsquerda()) + preOrdem(atual.getDireita());
-        }
-        
-        else
-        {
+        } else {
             return "";
         }
     }
-    
-    public String posOrdem(Elemento<T> atual)
-    {
-        if(atual != null)
-        {
+
+    public String posOrdem(Elemento<T> atual) {
+        if (atual != null) {
             return posOrdem(atual.getEsquerda()) + posOrdem(atual.getDireita()) + atual.getValor() + ", ";
-        }
-        
-        else
-        {
+        } else {
             return "";
         }
     }
-    
-    public boolean remover(T valor){
-        
+
+    public boolean remover(T valor) {
+
         Elemento<T> atual = this.raiz;
-        
+
         Elemento<T> paiAtual = null;
-        
-        while(atual != null){
-            
-            if (atual.getValor().equals(valor))
-            { 
-                break;                
-            }
-            
-            else if (valor.compareTo(atual.getValor()) == -1)
-            {  
+
+        while (atual != null) {
+
+            if (atual.getValor().equals(valor)) {
+                break;
+            } else if (valor.compareTo(atual.getValor()) == -1) {
                 paiAtual = atual;
-                
                 atual = atual.getEsquerda();
-            }
-            
-            else
-            {     
+            } else {
                 paiAtual = atual;
-                
                 atual = atual.getDireita();
             }
         }
-        
-        if (atual != null)
-        {
+
+        if (atual != null) {
             Elemento<T> removeEle = atual;
-            
-            Elemento<T> removePai = paiAtual; 
-            
-            if (removeEle.getDireita() != null){
-                
+
+            Elemento<T> removePai = paiAtual;
+
+            if (removeEle.getDireita() != null) {
+
                 Elemento<T> substituto = removeEle.getDireita();
-                
+
                 Elemento<T> paiSubstituto = removeEle;
-                
-                char paiFoi = 'D';                  
-                
-                while(substituto.getEsquerda() != null){
+
+                char paiFoi = 'D';
+
+                while (substituto.getEsquerda() != null) {
                     paiSubstituto = substituto;
                     substituto = substituto.getEsquerda();
                     paiFoi = 'E';
                 }
-                
-                if(paiFoi == 'D')
+
+                if (paiFoi == 'D') {
                     paiSubstituto.setEsquerda(substituto.getDireita());
-                
-                else                  
+                } else {
                     paiSubstituto.setDireita(substituto.getDireita());
-                
+                }
+
                 substituto.setEsquerda(removeEle.getEsquerda());
-                
+
                 substituto.setDireita(removeEle.getDireita());
-                
-                if (removePai != null){
-                    
-                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1)
-                    { 
+
+                if (removePai != null) {
+
+                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1) {
                         removePai.setEsquerda(substituto);
-                    }
-                    
-                    else
-                    {
+                    } else {
                         removePai.setDireita(substituto);
                     }
-                }
-                
-                else
-                {
+                } else {
                     this.raiz = substituto;
-                }   
-            }
-            
-            else if (removeEle.getEsquerda() != null){ 
-                
+                }
+            } else if (removeEle.getEsquerda() != null) {
+
                 Elemento<T> substituto = removeEle.getEsquerda();
-                
+
                 Elemento<T> paiSubstituto = removeEle;
-                
+
                 char paiFoi = 'E';
-                
-                
-                while(substituto.getDireita() != null)
-                {
+
+                while (substituto.getDireita() != null) {
                     paiSubstituto = substituto;
-                    
+
                     substituto = substituto.getDireita();
-                    
+
                     paiFoi = 'D';
                 }
-                               
-                if(paiFoi == 'E') 
+
+                if (paiFoi == 'E') {
                     paiSubstituto.setEsquerda(substituto.getEsquerda());
-                
-                else                        
-                   paiSubstituto.setDireita(substituto.getEsquerda());
-                
-                
+                } else {
+                    paiSubstituto.setDireita(substituto.getEsquerda());
+                }
+
                 substituto.setEsquerda(removeEle.getEsquerda());
-                
+
                 substituto.setDireita(removeEle.getDireita());
 
-                if (removePai != null){
-                    
-                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1)
-                    {
-                        removePai.setEsquerda(substituto); 
-                    }
-                    
-                    else
-                    {
+                if (removePai != null) {
+
+                    if (removeEle.getValor().compareTo(removePai.getValor()) == -1) {
+                        removePai.setEsquerda(substituto);
+                    } else {
                         removePai.setDireita(substituto);
                     }
-                }
-                
-                else
-                { 
+                } else {
                     this.raiz = substituto;
                 }
 
-            }
-            
-            else if (removePai != null){
-                
-                
-                if (removeEle.getValor().compareTo(removePai.getValor()) == -1){ 
+            } else if (removePai != null) {
+
+                if (removeEle.getValor().compareTo(removePai.getValor()) == -1) {
                     removePai.setEsquerda(null);
-                }
-                
-                else
-                { 
+                } else {
                     removePai.setDireita(null);
                 }
+            } else {
+                this.raiz = null;
             }
-            
-            else
-            { 
-                    this.raiz = null;
-            }
-            
+
             return true;
-        }
-        
-        
-        else
-        { 
+        } else {
             return false;
-        }        
+        }
     }
 }
