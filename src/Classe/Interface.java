@@ -13,10 +13,6 @@ public class Interface {
         SalvaArquivo sa = new SalvaArquivo();//Salvar os arquivo
         LinkedList<Senha> listaRecupera = new LinkedList<Senha>();
         listaRecupera = (LinkedList<Senha>) sa.ler();//Recupera e add os novos nomes
-        LinkedList<String> listaAplicativoBanco = new LinkedList<String>(); //Receber os nomes de Banco
-        LinkedList<String> listaNomesPassados = new LinkedList<String>(); //Receber os nomes de foram passado
-        //String neo2 = "";//Usado para receber os nomes e add na listaAplicativoBanco
-        //String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
         LinkedList<Indice> listaIndice = new LinkedList<Indice>();
 
         rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
@@ -59,7 +55,7 @@ public class Interface {
 
                 case 4:
                     Collections.sort(listaRecupera);
-                    JOptionPane.showMessageDialog(null, "** Lista em ordena com sucesso **\n\n **Não esqueça de salvar antes de sair**");
+                    JOptionPane.showMessageDialog(null, "---- Lista ordenada com sucesso ----");
                     break;
 
                 case 5:
@@ -131,16 +127,15 @@ public class Interface {
                             linha = leitor.readLine();
                         }
                         // Imprimimos o índice invertido
-                        for (Map.Entry<String, Integer> entrada : indice.entrySet()){
+                        for (Map.Entry<String, Integer> entrada : indice.entrySet()) {
                             Indice neo2 = new Indice(entrada.getKey(), entrada.getValue());
                             listaIndice.add(neo2);
-                        } 
-                            JOptionPane.showMessageDialog(null, "---- Índice invertido ----\n"+listaIndice.toString());
-                        
+                        }
+                        JOptionPane.showMessageDialog(null, "---- Índice invertido ----\n" + listaIndice.toString());
+
                     } catch (IOException e) {
-                        // Se ocorrer algum erro de entrada ou saída, imprimimos a mensagem de erro
-                        JOptionPane.showMessageDialog(null,"Erro ao ler o arquivo: " + e.getMessage() );
-                    } 
+                        JOptionPane.showMessageDialog(null, "Erro ao ler o arquivo");
+                    }
                     break;
 
                 case 9:
