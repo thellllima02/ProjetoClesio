@@ -1,5 +1,6 @@
 package Classe;
 
+import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
@@ -14,8 +15,9 @@ public class Interface {
         listaRecupera = (LinkedList<Senha>) sa.ler();//Recupera e add os novos nomes
         LinkedList<String> listaAplicativoBanco = new LinkedList<String>(); //Receber os nomes de Banco
         LinkedList<String> listaNomesPassados = new LinkedList<String>(); //Receber os nomes de foram passado
-        String neo2 = "";//Usado para receber os nomes e add na listaAplicativoBanco
-        String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
+        //String neo2 = "";//Usado para receber os nomes e add na listaAplicativoBanco
+        //String neo3 = "";//Usado para receber os nomes e add na listaNomesPassados
+        LinkedList<Indice> listaIndice = new LinkedList<Indice>();
 
         rodar = JOptionPane.showInputDialog(null, "---- Desejar abrir o sistema ? ----\n ( Sim / Não )");
 
@@ -100,68 +102,45 @@ public class Interface {
                     break;
 
                 case 8:
-                    //Pegando todos os nomes de bancos e colocando em uma lista
-                    for (int e = 0; e < listaRecupera.size(); e++) {
-                        Senha recebe = listaRecupera.get(e);
-
-                        String texto = recebe.getNomeDoAplicativo();
-
-                        String palavra = "";
-                        int cont = 1,
-                                cont2 = 0;
-                        //Ver quantas palavras tem no frase.
-                        for (int i = 0; i < texto.length(); i++) {
-                            if (texto.charAt(i) == ' ') {
-                                cont++;
+                    // Criamos um mapa para armazenar o índice invertido
+                    Map<String, Integer> indice = new HashMap<String, Integer>();
+                    // Criamos um leitor de arquivo
+                    BufferedReader leitor = null;
+                    try {
+                        ;
+                        // Abrimos o arquivo para leitura
+                        leitor = new BufferedReader(new FileReader("src/Classe/indice.txt"));
+                        // Lemos a primeira linha do arquivo
+                        String linha = leitor.readLine();
+                        // Enquanto houver linhas no arquivo
+                        while (linha != null) {
+                            // Removemos os espaços em branco da linha
+                            linha = linha.trim();
+                            // Se a linha não estiver vazia
+                            if (!linha.isEmpty()) {
+                                // Verificamos se o mapa já contém a senha da linha
+                                if (indice.containsKey(linha)) {
+                                    // Se sim, incrementamos a contagem da senha
+                                    indice.put(linha, indice.get(linha) + 1);
+                                } else {
+                                    // Se não, adicionamos a senha com a contagem inicial de 1
+                                    indice.put(linha, 1);
+                                }
                             }
+                            // Lemos a próxima linha do arquivo
+                            linha = leitor.readLine();
                         }
-                        //Fazendo a coleta de cada palavra que veio no texto
-                        for (int i = cont2; i < texto.length(); i++) {
-                            if (texto.charAt(i) != ' ') {
-                                palavra += texto.charAt(i);
-                                cont2++;
-                            } else {
-                                neo2 = new String(palavra);
-                                listaAplicativoBanco.add(neo2);
-                                cont2++;
-                                palavra = "";
-                            }
-                        }
-                        neo2 = new String(palavra);
-                        listaAplicativoBanco.add(neo2);//Usar para ver os nomes de bancos
-
-                    }
-                    //Pegando os nomes da String e colocando na lista
-                    String recebe2 = JOptionPane.showInputDialog(null, "Digite os nomes ");
-                    String texto2 = recebe2;
-
-                    String palavra2 = "";
-                    int cont = 1,
-                     cont2 = 0;
-                    //Ver quantas palavras tem no frase.
-                    for (int i = 0; i < texto2.length(); i++) {
-                        if (texto2.charAt(i) == ' ') {
-                            cont++;
-                        }
-                    }
-                    //Fazendo a coleta de cada palavra que veio no texto
-                    for (int i = cont2; i < texto2.length(); i++) {
-                        if (texto2.charAt(i) != ' ') {
-                            palavra2 += texto2.charAt(i);
-                            cont2++;
-                        } else {
-                            neo3 = new String(palavra2);
-                            listaNomesPassados.add(neo3);
-                            cont2++;
-                            palavra2 = "";
-                        }
-                    }
-                    neo3 = new String(palavra2);
-                    listaNomesPassados.add(neo3);//Usar para ver os nomes
-
-                    JOptionPane.showMessageDialog(null, listaAplicativoBanco);
-                    JOptionPane.showMessageDialog(null, listaNomesPassados);
-
+                        // Imprimimos o índice invertido
+                        for (Map.Entry<String, Integer> entrada : indice.entrySet()){
+                            Indice neo2 = new Indice(entrada.getKey(), entrada.getValue());
+                            listaIndice.add(neo2);
+                        } 
+                            JOptionPane.showMessageDialog(null, "---- Índice invertido ----\n"+listaIndice.toString());
+                        
+                    } catch (IOException e) {
+                        // Se ocorrer algum erro de entrada ou saída, imprimimos a mensagem de erro
+                        JOptionPane.showMessageDialog(null,"Erro ao ler o arquivo: " + e.getMessage() );
+                    } 
                     break;
 
                 case 9:
