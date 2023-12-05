@@ -3,9 +3,8 @@ package Classe;
 import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
-
+      
 public class Interface {
-
     public static void main(String[] args) {
         String rodar = " ";
         int opcao = 0;
@@ -19,15 +18,15 @@ public class Interface {
 
         while (rodar.equalsIgnoreCase("sim")) {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
-                    "Digite o número corrspondente "
-                    + "\n\n1.Inclui senha na LISTA "
-                    + "\n2.Deletar senha na LISTA "
-                    + "\n3.Mostrar LISTA de senhas "
-                    + "\n4.Inserir lista de senhas numa FILA "
-                    + "\n5.Criar PILHAS com palavras que são do mesmo aplicativo "
+                    "       ** Digite o número correspondente **"
+                    + "\n1.Cadastrar senha "
+                    + "\n2.Deletar senha "
+                    + "\n3.Mostrar senhas salvas "
+                    + "\n4.Organizar as senhas por ordem de tamanho "
+                    + "\n5.Organizar as senhas por aplicativo "
                     + "\n6.Inserir senhas numa ARVORE "
-                    + "\n7.Salvar Lista "
-                    + "\n8.[Extra] Criar índice invertido"
+                    + "\n7.Salvar as senhas "
+                    + "\n8.[Extra]Contador de senhas"
                     + "\n9.Sair ?"));
 
             switch (opcao) {
@@ -39,15 +38,16 @@ public class Interface {
 
                 case 2:
                     if (listaRecupera.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Está vazia");
+                        JOptionPane.showMessageDialog(null, "---- Está vazia ----");
                     } else {
                         listaRecupera.removeLast();
+                        JOptionPane.showMessageDialog(null, "---- Deletado ----");
                     }
                     break;
 
                 case 3:
                     if (listaRecupera.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Está vazia");
+                        JOptionPane.showMessageDialog(null, "---- Está vazia ----");
                     } else {
                         JOptionPane.showMessageDialog(null, "---- Lista gravada ----\n" + listaRecupera.toString());
                     }
