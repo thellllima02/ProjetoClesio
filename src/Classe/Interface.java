@@ -90,6 +90,7 @@ public class Interface {
                     JOptionPane.showMessageDialog(null, "---- Arvore em Pre Ordem ----\n" + arvore.preOrdem(arvore.getRaiz()));
                     JOptionPane.showMessageDialog(null, "---- Arvore em Ordem ----\n" + arvore.emOrdem(arvore.getRaiz()));
                     JOptionPane.showMessageDialog(null, "---- Arvore em Pos Ordem ----\n" + arvore.posOrdem(arvore.getRaiz()));
+                    JOptionPane.showInternalMessageDialog(null, "---- Lista Reserva ----\n" + lista2);
                     break;
 
                 case 7:

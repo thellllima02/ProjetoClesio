@@ -37,5 +37,8 @@ public class Elemento<TIPO> {
         this.direita = direita;
     }
     
-    
+    public boolean equivale(Elemento<TIPO> outro)
+    {
+        return this.valor.equals(outro.getValor());
+    }
 }

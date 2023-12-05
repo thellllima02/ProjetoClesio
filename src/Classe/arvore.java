@@ -16,67 +16,35 @@ public class Arvore<T extends Comparable> {
         this.raiz = r;
     }
 
-    public boolean adicionar(T valor)
-    {
+    public boolean adicionar(T valor) {
         Elemento<T> novoElemento = new Elemento<T>(valor);
-        
-        if(raiz == null)
-        {
+        if (raiz == null) {
             this.raiz = novoElemento;
-            
             return true;
-        }
-        
-        else
-        {
+        } else {
             Elemento<T> atual = this.raiz;
-            
-            while(true)
-            {
-                
-                if ((novoElemento.getValor().compareTo(atual.getValor()) < 0))
-                {
-                    if((novoElemento.getValor().equals(atual.getValor())))
-                    {
-                        return false;
-                    }
-                    
-                    else
-                    {
-                        if(atual.getEsquerda() != null)
-                        {
+            while (true) {
+                switch (novoElemento.getValor().compareTo(atual.getValor())) {
+                    case -1:
+                        if (atual.getEsquerda() != null) {
                             atual = atual.getEsquerda();
-                        }
-                        
-                        else
-                        {
+                        } else {
                             atual.setEsquerda(novoElemento);
-                        
+
                             return true;
                         }
-                    }
-                }
-                
-                else
-                {
-                    if((novoElemento.getValor().equals(atual.getValor())))
-                    {
-                        return false;
-                    }
-                    
-                    else{
-                        if (atual.getDireita() != null)
-                        {
+                        break;
+                    case 1:
+                        if (atual.getDireita() != null) {
                             atual = atual.getDireita();
-                        }
-                        
-                        else
-                        {
+                        } else {
                             atual.setDireita(novoElemento);
-                        
+
                             return true;
                         }
-                    }
+                        break;
+                    default:
+                        return false;
                 }
             }
         }
