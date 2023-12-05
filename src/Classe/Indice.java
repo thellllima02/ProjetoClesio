@@ -30,7 +30,7 @@ public class Indice {
 
     @Override
     public String toString() {
-        return "Nome = " + this.nome + " Quantidade = " + this.valor+"\n";
+        return "Nome = " + this.nome + " - Quantidade = " + this.valor+"\n";
     }
     
     
