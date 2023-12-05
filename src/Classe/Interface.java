@@ -128,11 +128,11 @@ public class Interface {
                             linha = leitor.readLine();
                         }
                         // Imprimimos o índice invertido
-                        for (Map.Entry<String, Integer> entrada : indice.entrySet()) {
-                            Indice neo2 = new Indice(entrada.getKey(), entrada.getValue());
-                            listaIndice.add(neo2);
-                        }
-                        JOptionPane.showMessageDialog(null, "---- Índice invertido ----\n" + listaIndice.toString());
+//                        for (Map.Entry<String, Integer> entrada : indice.entrySet()) {
+//                            Indice neo2 = new Indice(entrada.getKey(), entrada.getValue());
+//                            listaIndice.add(neo2);
+//                        }
+                        JOptionPane.showMessageDialog(null, "---- Índice invertido ----\n" + indice);
 
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, "Erro ao ler o arquivo");
